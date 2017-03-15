@@ -18,3 +18,9 @@ development:
 test:
   <<: *default
   database: pg_rails_test
+
+production:
+  <<: *default
+  host: <%= ENV["DB_HOST"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  database: pg_rails_prod
