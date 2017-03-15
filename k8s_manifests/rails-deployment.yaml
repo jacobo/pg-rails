@@ -13,13 +13,13 @@ spec:
         app: pg-rails
     spec:
       containers:
-      - image: pg-rails
-        name: jacobo/no-db-rails:latest
+      - name: pg-rails
+        image: jacobo/pg-rails:latest
         env:
         #TODO: specify a secret key base too
         #TODO: how do I make a composite environment variable?
         - name: DB_HOST
-          value: pg-for-pg-rails #works because of kubeDNS and the name we gave our DB deployments
+          value: pg-rails-service #works because of kubeDNS and the name we gave our DB deployments
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:

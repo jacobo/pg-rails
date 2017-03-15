@@ -1,6 +1,8 @@
     $ docker build . -t jacobo/pg-rails
     $ docker run -p 5000:5000 jacobo/pg-rails
 
+    $ docker push jacobo/pg-rails
+
 Setup the DB:
   1. Storage Class
   
@@ -35,7 +37,20 @@ Setup the DB:
           $ psql -h pg-rails-service -U postgres
       
       #or connect via already running container
-      k exec -it pg-for-pg-rails-732073437-db1nf
+      k exec -it pg-for-pg-rails-732073437-db1nf bash
+
+Setup rail App:
+
+  TODO: make rails log STDOUT so that k logs is useful?
+
+  1. Deployment (app)
+
+  2. Service (load balancer)
+
+
+  3. db:create, db:migrate
+
+    $ k exec -it pg-rails-1466721731-92jkm bash
 
 
 ----
@@ -44,6 +59,14 @@ k run busybox -it --image=busybox --restart=Never -- bin/bash
 k get pods -a
 k delete busybox
 
+      k replace -f k8s_manifests/rails-deployment.yaml
+
+
+helm lifecycle hooks
+
+jobs
+
+https://github.com/kelseyhightower/lobsters-on-kubernetes
 
 ----
 

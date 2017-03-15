@@ -22,5 +22,6 @@ test:
 production:
   <<: *default
   host: <%= ENV["DB_HOST"] %>
+  user: postgres
   password: <%= ENV["DB_PASSWORD"] %>
   database: pg_rails_prod
