@@ -56,9 +56,11 @@ Setup rail App:
 
 Use RDS DB instead:
 
-    echo REDACTED | erb -r base64 -r securerandom k8s_manifests/rds-db-url-secret.yaml | kubectl create -f -
+    echo REDACTED_FULL_DB_URL | erb -r base64 -r securerandom k8s_manifests/rds-db-url-secret.yaml | kubectl create -f -
 
-    k replace -f k8s_manifests/db-deployment.yaml
+    k replace -f k8s_manifests/rails-deployment.yaml
+
+    k exec -it pg-rails-2343330091-0g9zd bash
 
 ----
 
