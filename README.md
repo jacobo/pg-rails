@@ -51,7 +51,14 @@ Setup rail App:
   3. db:create, db:migrate
 
     $ k exec -it pg-rails-1466721731-92jkm bash
+        bundle exec rake db:create
+        bundle exec rake db:migrate
 
+Use RDS DB instead:
+
+    echo REDACTED | erb -r base64 -r securerandom k8s_manifests/rds-db-url-secret.yaml | kubectl create -f -
+
+    k replace -f k8s_manifests/db-deployment.yaml
 
 ----
 

@@ -19,9 +19,13 @@ test:
   <<: *default
   database: pg_rails_test
 
+# RDS DB will provide a DATABASE_URL
+<% if ENV['DATABASE_URL'].blank? %>
 production:
+  # DB Service/Deployment provided by k8s will use shared secret (and become admin on the DB)
   <<: *default
   host: <%= ENV["DB_HOST"] %>
   user: postgres
   password: <%= ENV["DB_PASSWORD"] %>
   database: pg_rails_prod
+<% end %>

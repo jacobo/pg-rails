@@ -18,13 +18,20 @@ spec:
         env:
         #TODO: specify a secret key base too
         #TODO: how do I make a composite environment variable?
-        - name: DB_HOST
-          value: pg-rails-service #works because of kubeDNS and the name we gave our DB deployments
-        - name: DB_PASSWORD
+        - name: MY_APP_VERSION
+          value: v1 #increment this to "cheat" and get a re-deployment
+        - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: pg-db-secret
-              key: postgres-password
+              name: rds-pg-db-url
+              key: database-url
+        # - name: DB_HOST
+        #   value: pg-rails-service #works because of kubeDNS and the name we gave our DB deployments
+        # - name: DB_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: pg-db-secret
+        #       key: postgres-password
         ports:
         - containerPort: 5000
           name: pg-rails #TODO: why do ports need names?
